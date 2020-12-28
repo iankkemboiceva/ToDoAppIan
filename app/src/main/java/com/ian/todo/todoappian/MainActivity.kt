@@ -1,18 +1,18 @@
 package com.ian.todo.todoappian
 
 import android.os.Bundle
-import androidx.activity.viewModels
+
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import dagger.hilt.android.AndroidEntryPoint
+
 import db.ToDoTask
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import viewmodels.ToDoListViewModel
 import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
-    private val viewModel: ToDoListViewModel by viewModels()
+    private val viewModel by viewModel<ToDoListViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

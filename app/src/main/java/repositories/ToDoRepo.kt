@@ -7,13 +7,13 @@ import db.ToDoTask
 import db.ToDoTaskDao
 import io.reactivex.Observable
 import io.reactivex.Single
-import javax.inject.Inject
 
 
 
 
 
-class ToDoRepo @Inject constructor(private val todolistdao: ToDoTaskDao?) {
+
+class ToDoRepo (private val todolistdao: ToDoTaskDao?) {
     private var tasks: LiveData<List<ToDoTask>>? = null
 
 
