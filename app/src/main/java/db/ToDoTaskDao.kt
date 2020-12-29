@@ -21,7 +21,7 @@ interface ToDoTaskDao {
     fun getToDoTaskByName(title: String): LiveData<List<ToDoTask>>
 
     @Query("SELECT * FROM todo WHERE id == :id")
-    fun getToDoTaskById(id: Int): LiveData<ToDoTask>
+    fun getToDoTaskById(id: Long): ToDoTask
 
     @Query("SELECT * FROM todo")
     fun getToDoTasks(): Single<List<ToDoTask>>

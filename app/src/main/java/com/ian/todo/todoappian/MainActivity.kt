@@ -1,7 +1,9 @@
 package com.ian.todo.todoappian
 
 import adapter.ToDoListAdapter
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -27,6 +29,12 @@ class MainActivity : AppCompatActivity(), RecyclerViewCallback {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.viewModel = viewModel
+
+        binding.fab.setOnClickListener(){
+            val intent = Intent(this, AddTaskActivity::class.java)
+
+            startActivity(intent)
+        }
         initRecyclerView()
         observeData()
 
@@ -35,17 +43,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewCallback {
 
     }
 
-    fun addTask() {
-        val task = ToDoTask(
-            2,
-            "Title",
-            "Content",
-            "https://cropnuts.com/wp-content/uploads/2019/09/drinking_water_bottle.jpg",
-            Date(),
-            false
-        )
-        viewModel.addToDo(task)
-    }
+
 
     private fun initRecyclerView() {
         binding.recyclerview.setLayoutManager(LinearLayoutManager(this))
@@ -68,6 +66,10 @@ class MainActivity : AppCompatActivity(), RecyclerViewCallback {
     }
 
     override fun onRecycleViewItemClick(task: ToDoTask, position: Int) {
-        TODO("Not yet implemented")
+        val intent = Intent(this, ToDoDetailsActivity::class.java)
+        intent.putExtra("task", task)
+        startActivity(intent)
     }
+
+
 }

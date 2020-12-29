@@ -27,7 +27,7 @@ class ToDoRepo (private val todolistdao: ToDoTaskDao?) {
         return todolistdao!!.getToDoTasks()
     }
 
-    fun getloadTaskById(taskId: Int): LiveData<ToDoTask> {
+    fun getloadTaskById(taskId: Long): ToDoTask {
         return todolistdao!!.getToDoTaskById(taskId)
     }
 

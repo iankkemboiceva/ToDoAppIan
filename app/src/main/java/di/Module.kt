@@ -7,11 +7,14 @@ import db.ToDoTaskDao
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 import repositories.ToDoRepo
+import viewmodels.AddEditTaskViewModel
 import viewmodels.ToDoListViewModel
-
+import viewmodels.DetailsViewModel
 
 val viewModelModule = module {
     single { ToDoListViewModel(get()) }
+    single { AddEditTaskViewModel(get()) }
+    single { DetailsViewModel() }
 }
 val databaseModule = module {
 

@@ -8,6 +8,7 @@ import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Entity(tableName = "todo")
+@Parcelize
 data class ToDoTask(@PrimaryKey(autoGenerate = true) val id: Long?,
                        val title: String,
                       val content: String,
@@ -15,4 +16,4 @@ data class ToDoTask(@PrimaryKey(autoGenerate = true) val id: Long?,
                       @ColumnInfo(name = "updated_date")
                       val updateddate: Date,
                       val booledit: Boolean
-)
+): Parcelable
