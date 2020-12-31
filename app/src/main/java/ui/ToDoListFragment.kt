@@ -10,7 +10,7 @@ import com.ian.todo.todoappian.R
 
 
 
-class ToDoListFragment : Fragment() {
+class NoteListFragment : Fragment() {
 
 
 

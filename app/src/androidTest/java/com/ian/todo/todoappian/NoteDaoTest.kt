@@ -2,7 +2,7 @@ package com.ian.todo.todoappian
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ian.todo.todoappian.constants.TestConstants
-import db.ToDoTask
+import db.NoteTask
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,7 +17,7 @@ class UserDaoTest : DBTest() {
     @Test
     fun insertAndLoad() {
         val now = Date()
-        val entities = ToDoTask(
+        val entities = NoteTask(
             1,
             TestConstants.title,
             TestConstants.content,
@@ -25,10 +25,12 @@ class UserDaoTest : DBTest() {
             now,
             false
         )
-        db.todoDao.insertToDoTask(entities)
+        db.notedao.insertNoteTask(entities).blockingAwait()
 
-        val loaded = db.todoDao.getToDoTaskById(entities.id!!)
-        Assert.assertEquals(loaded.title, TestConstants.title)
+        db.notedao.getNoteTasks().test().assertValue { list ->
+            list.isNotEmpty()
+
+        }
 
 
     }
@@ -36,7 +38,7 @@ class UserDaoTest : DBTest() {
     @Test
     fun checkTaskUpdateHappensCorrectly() {
         val now = Date()
-        var inserted = ToDoTask(
+        var inserted = NoteTask(
             1,
             TestConstants.title,
             TestConstants.content,
@@ -44,20 +46,22 @@ class UserDaoTest : DBTest() {
             now,
             false
         )
-        db.todoDao.insertToDoTask(inserted)
+        db.notedao.insertNoteTask(inserted).blockingAwait()
 
         inserted.title = "Updated Title"
-        db.todoDao.updateToDoTask(inserted)
-        val loaded = db.todoDao.getToDoTaskById(inserted.id!!)
+        db.notedao.updateNoteTask(inserted).blockingAwait()
+
+        val loaded = db.notedao.getNoteTaskById(inserted.id!!)
         Assert.assertEquals(loaded.title, "Updated Title")
 
 
     }
 
+
     @Test
     fun checkDeleteHappensCorrectly() {
         val now = Date()
-        val entities = ToDoTask(
+        val task = NoteTask(
             1,
             TestConstants.title,
             TestConstants.content,
@@ -65,11 +69,13 @@ class UserDaoTest : DBTest() {
             now,
             false
         )
-        db.todoDao.insertToDoTask(entities)
+        db.notedao.insertNoteTask(task).blockingAwait()
 
-        db.todoDao.deleteToDoTask(entities)
-        val loaded = db.todoDao.getToDoTaskById(entities.id!!)
-        Assert.assertNull(loaded)
+        db.notedao.deleteNoteTask(task)
+        db.notedao.getNoteTasks().test().assertValue { list ->
+            list.isEmpty()
+
+        }
 
 
     }

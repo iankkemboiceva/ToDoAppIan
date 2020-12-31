@@ -1,26 +1,25 @@
 package com.ian.todo.todoappian
 
-import adapter.ToDoListAdapter
+import adapter.NoteListAdapter
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ian.todo.todoappian.databinding.ActivityMainBinding
-import db.ToDoTask
+import db.NoteTask
 import model.RecyclerViewCallback
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import viewmodels.ToDoListViewModel
+import viewmodels.NoteListViewModel
 import java.util.*
 
 
 class MainActivity : AppCompatActivity(), RecyclerViewCallback {
     private lateinit var binding: ActivityMainBinding
-    private val viewModel by viewModel<ToDoListViewModel>()
+    private val viewModel by viewModel<NoteListViewModel>()
 
-    private var adapter: ToDoListAdapter? = null
+    private var adapter: NoteListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +30,8 @@ class MainActivity : AppCompatActivity(), RecyclerViewCallback {
         binding.viewModel = viewModel
 
         binding.fab.setOnClickListener(){
-            val intent = Intent(this, AddTaskActivity::class.java)
-
+            val intent = Intent(this, AddEditNoteActivity::class.java)
+            intent.putExtra("flagtoadd", true)
             startActivity(intent)
         }
         initRecyclerView()
@@ -51,23 +50,24 @@ class MainActivity : AppCompatActivity(), RecyclerViewCallback {
     }
 
     fun getAllTasks() {
-        viewModel.getAllToDo()
+        viewModel.getAllNote()
     }
 
     private fun observeData() {
-        viewModel.getToDoList()!!
-            .observe(this, Observer<List<ToDoTask>> {
+        viewModel.getNoteList()!!
+            .observe(this, Observer<List<NoteTask>> {
                     it ->
-                adapter = ToDoListAdapter(it,this@MainActivity)
+                adapter = NoteListAdapter(it,this@MainActivity)
                 adapter!!.setOnCallbackListener(this)
                 binding.recyclerview.adapter = adapter
 
             })
     }
 
-    override fun onRecycleViewItemClick(task: ToDoTask, position: Int) {
-        val intent = Intent(this, ToDoDetailsActivity::class.java)
+    override fun onRecycleViewItemClick(task: NoteTask, position: Int) {
+        val intent = Intent(this, NoteDetailsActivity::class.java)
         intent.putExtra("task", task)
+
         startActivity(intent)
     }
 

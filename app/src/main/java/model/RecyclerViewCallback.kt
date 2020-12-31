@@ -1,8 +1,8 @@
 package model
 
-import db.ToDoTask
+import db.NoteTask
 
 interface RecyclerViewCallback {
-    fun onRecycleViewItemClick(task: ToDoTask, position: Int)
+    fun onRecycleViewItemClick(task: NoteTask, position: Int)
 
 }

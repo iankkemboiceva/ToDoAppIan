@@ -3,6 +3,8 @@ package viewmodels
 import android.R
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.widget.ImageView
 
@@ -13,20 +15,23 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import db.ToDoTask
+import db.NoteTask
 
 
 
-class ToDoItemViewModel: BaseViewModel() {
+class NoteItemViewModel: BaseViewModel() {
     private val thumbnail = MutableLiveData<String>()
     private val title = MutableLiveData<String>()
     private val content = MutableLiveData<String>()
+    private val updatedon = MutableLiveData<String>()
   
 
-    fun bind(todolist: ToDoTask){
+    fun bind(todolist: NoteTask){
         thumbnail.value = todolist.imgurl
         title.value = todolist.title
         content.value = todolist.content
+
+     //   updatedon.value = todolist.updateddate
 
     }
     companion object {
@@ -34,6 +39,7 @@ class ToDoItemViewModel: BaseViewModel() {
         @JvmStatic
         fun loadimage(imgview: ImageView, imageUrl: String?) {
             Glide.with(imgview.context).load(imageUrl)
+                .placeholder(ColorDrawable(Color.GRAY))
                 .apply(RequestOptions.circleCropTransform())
                 .into(imgview)
 

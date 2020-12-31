@@ -3,20 +3,20 @@ package viewmodels
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import db.ToDoTask
+import db.NoteTask
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import repositories.ToDoRepo
+import repositories.NoteRepo
 
 
-class ToDoListViewModel(private val todorepo: ToDoRepo) : BaseViewModel() {
+class NoteListViewModel(private val todorepo: NoteRepo) : BaseViewModel() {
 
-    private val TAG = "ToDoListViewModel"
+    private val TAG = "NoteListViewModel"
 
-    private val respse: MutableLiveData<List<ToDoTask>> =
-        MutableLiveData<List<ToDoTask>>()
+    private val respse: MutableLiveData<List<NoteTask>> =
+        MutableLiveData<List<NoteTask>>()
 
-    fun getAllToDo() {
+    fun getAllNote() {
 
 
         val disposable = todorepo.getloadAllTasks()
@@ -27,7 +27,7 @@ class ToDoListViewModel(private val todorepo: ToDoRepo) : BaseViewModel() {
                 handleresult(todolist)
 
             }, { exception ->
-
+Log.e(TAG, exception.toString())
             })
 
         addDisposable(disposable)
@@ -35,13 +35,13 @@ class ToDoListViewModel(private val todorepo: ToDoRepo) : BaseViewModel() {
 
 
 
-    private fun handleresult(result: List<ToDoTask>) {
+    private fun handleresult(result: List<NoteTask>) {
 
         respse?.value = result
         Log.v(TAG, result[0].title)
     }
 
-    fun getToDoList(): MutableLiveData<List<ToDoTask>> {
+    fun getNoteList(): MutableLiveData<List<NoteTask>> {
         return respse
     }
 }

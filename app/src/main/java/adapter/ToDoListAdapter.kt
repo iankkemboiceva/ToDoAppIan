@@ -15,29 +15,29 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.ian.todo.todoappian.R
 import com.ian.todo.todoappian.databinding.ItemTodoBinding
-import db.ToDoTask
+import db.NoteTask
 import model.RecyclerViewCallback
-import viewmodels.ToDoItemViewModel
+import viewmodels.NoteItemViewModel
 
 
-class ToDoListAdapter(private  var todolist:List<ToDoTask>, val ct: Context): RecyclerView.Adapter<ToDoListAdapter.ViewHolder>() {
+class NoteListAdapter(private  var todolist:List<NoteTask>, val ct: Context): RecyclerView.Adapter<NoteListAdapter.ViewHolder>() {
 
 
     var recyclerViewCallback: RecyclerViewCallback? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ToDoListAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteListAdapter.ViewHolder {
         val binding: ItemTodoBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_todo, parent, false)
 
         return ViewHolder(binding).apply {
             itemView.setOnClickListener {
 
-              this@ToDoListAdapter.recyclerViewCallback?.onRecycleViewItemClick(todolist[adapterPosition], adapterPosition)
+              this@NoteListAdapter.recyclerViewCallback?.onRecycleViewItemClick(todolist[adapterPosition], adapterPosition)
             }
         }
 
     }
 
-    override fun onBindViewHolder(holder: ToDoListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NoteListAdapter.ViewHolder, position: Int) {
         holder.bind(todolist[position])
 
 
@@ -53,17 +53,17 @@ class ToDoListAdapter(private  var todolist:List<ToDoTask>, val ct: Context): Re
         return todolist.size
     }
 
-    fun updatePostList(todolst:List<ToDoTask>){
+    fun updatePostList(todolst:List<NoteTask>){
         this.todolist = todolst
 
         notifyDataSetChanged()
     }
 
     class ViewHolder(private val binding: ItemTodoBinding): RecyclerView.ViewHolder(binding.root){
-        private val viewModel = ToDoItemViewModel()
+        private val viewModel = NoteItemViewModel()
 
 
-        fun bind(task:ToDoTask){
+        fun bind(task:NoteTask){
             viewModel.bind(task)
             binding.viewModel = viewModel
 

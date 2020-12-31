@@ -8,6 +8,6 @@ class TestConstants {
         const val title = "Sample Title"
         val imgurl = "Image url"
         val content = "Sample Content"
-        val booledit = false;
+
     }
 }

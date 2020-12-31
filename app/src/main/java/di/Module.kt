@@ -3,18 +3,18 @@ package di
 import android.app.Application
 import androidx.room.Room
 import db.AppDatabase
-import db.ToDoTaskDao
+import db.NoteTaskDao
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
-import repositories.ToDoRepo
+import repositories.NoteRepo
 import viewmodels.AddEditTaskViewModel
-import viewmodels.ToDoListViewModel
+import viewmodels.NoteListViewModel
 import viewmodels.DetailsViewModel
 
 val viewModelModule = module {
-    single { ToDoListViewModel(get()) }
+    single { NoteListViewModel(get()) }
     single { AddEditTaskViewModel(get()) }
-    single { DetailsViewModel() }
+    single { DetailsViewModel(get()) }
 }
 val databaseModule = module {
 
@@ -26,8 +26,8 @@ val databaseModule = module {
     }
 
 
-    fun provideDao(database: AppDatabase): ToDoTaskDao {
-        return database.todoDao
+    fun provideDao(database: AppDatabase): NoteTaskDao {
+        return database.notedao
     }
 
     single { provideDatabase(androidApplication()) }
@@ -35,9 +35,9 @@ val databaseModule = module {
 }
 
 val repositoryModule = module {
-    fun provideToDoRepo( dao: ToDoTaskDao): ToDoRepo {
-        return ToDoRepo( dao)
+    fun provideNoteRepo( dao: NoteTaskDao): NoteRepo {
+        return NoteRepo( dao)
     }
 
-    single { provideToDoRepo(get()) }
+    single { provideNoteRepo(get()) }
 }
