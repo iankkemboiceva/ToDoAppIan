@@ -1,6 +1,5 @@
 package com.ian.todo.todoappian
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ian.todo.todoappian.constants.TestConstants
 import db.NoteTask
 import org.junit.Assert
@@ -9,8 +8,7 @@ import org.junit.runner.RunWith
 import java.util.*
 
 
-@RunWith(AndroidJUnit4::class)
-class UserDaoTest : DBTest() {
+class NoteDaoTest : DBTest() {
 
 
 

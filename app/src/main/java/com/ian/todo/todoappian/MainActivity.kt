@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewCallback {
 
         binding.viewModel = viewModel
 
-        binding.fab.setOnClickListener(){
+        binding.fab.setOnClickListener {
             val intent = Intent(this, AddEditNoteActivity::class.java)
             intent.putExtra("flagtoadd", true)
             startActivity(intent)
@@ -45,17 +45,17 @@ class MainActivity : AppCompatActivity(), RecyclerViewCallback {
 
 
     private fun initRecyclerView() {
-        binding.recyclerview.setLayoutManager(LinearLayoutManager(this))
+        binding.recyclerview.layoutManager = LinearLayoutManager(this)
 
     }
 
-    fun getAllTasks() {
+    private fun getAllTasks() {
         viewModel.getAllNote()
     }
 
     private fun observeData() {
-        viewModel.getNoteList()!!
-            .observe(this, Observer<List<NoteTask>> {
+        viewModel.getNoteList()
+            .observe(this, {
                     it ->
                 adapter = NoteListAdapter(it,this@MainActivity)
                 adapter!!.setOnCallbackListener(this)

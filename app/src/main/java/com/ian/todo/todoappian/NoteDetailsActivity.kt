@@ -46,7 +46,7 @@ class NoteDetailsActivity : AppCompatActivity() {
             builder.setMessage("Are you sure you want to delete this note?")
 
 
-            builder.setPositiveButton("YES") { dialog, which ->
+            builder.setPositiveButton("YES") { _, _ ->
                 viewModel.deleteNote(note)
                 finish()
                 val intent = Intent(this, MainActivity::class.java)

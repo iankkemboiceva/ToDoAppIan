@@ -29,13 +29,13 @@ class AddEditNoteActivity : AppCompatActivity() {
                 binding.titleedit.setText(notes.title)
                 binding.descredit.setText(notes.content)
                 binding.imgurledit.setText(notes.imgurl)
-                binding.txtstatus.setText("MODIFY NOTE")
+                binding.txtstatus.text = "MODIFY NOTE"
             } else {
-                binding.txtstatus.setText("ADD NOTE")
+                binding.txtstatus.text = "ADD NOTE"
             }
         }
 
-        binding.btnadd.setOnClickListener() {
+        binding.btnadd.setOnClickListener {
 
             val strtitle = binding.titleedit.text.toString()
             val conttitle = binding.descredit.text.toString()
@@ -67,7 +67,7 @@ class AddEditNoteActivity : AppCompatActivity() {
         }
     }
 
-    fun showToast(strmsg: String) {
+    private fun showToast(strmsg: String) {
         Toast.makeText(applicationContext, strmsg, Toast.LENGTH_LONG).show()
     }
 }

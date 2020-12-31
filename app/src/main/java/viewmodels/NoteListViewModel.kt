@@ -37,7 +37,7 @@ Log.e(TAG, exception.toString())
 
     private fun handleresult(result: List<NoteTask>) {
 
-        respse?.value = result
+        respse.value = result
         Log.v(TAG, result[0].title)
     }
 

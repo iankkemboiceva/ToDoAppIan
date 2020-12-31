@@ -66,7 +66,7 @@ class NoteRepoTests {
 
         val updatedtask = task
         updatedtask.title = "Updated Title"
-        NoteTaskRepository.updateTaskById(updatedtask)
+        NoteTaskRepository.updateTask(updatedtask)
         val requestedtask = NoteTaskRepository.getloadTaskById(updatedtask.id!!).title
         Assert.assertEquals("Updated Title", requestedtask)
     }

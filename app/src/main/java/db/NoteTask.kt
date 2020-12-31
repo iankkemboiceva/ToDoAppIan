@@ -15,6 +15,6 @@ data class NoteTask(@PrimaryKey(autoGenerate = true) val id: Long?,
                     val content: String,
                     val imgurl: String,
                     @ColumnInfo(name = "updated_date")
-                      val updateddate: LocalDate,
+                      val updateddate: Date,
                     val booledit: Boolean
 ): Parcelable

@@ -15,6 +15,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import db.NoteTask
 import repositories.NoteRepo
+import utils.Utility
 
 
 class DetailsViewModel(private val todorepo: NoteRepo): BaseViewModel() {
@@ -23,14 +24,14 @@ class DetailsViewModel(private val todorepo: NoteRepo): BaseViewModel() {
     private val todourl = MutableLiveData<String>()
     private val updateddate = MutableLiveData<String>()
 
-    private val booledit = MutableLiveData<String>()
+
 
 
     fun bind(task: NoteTask){
         title.value = task.title
         content.value = task.content
         todourl.value = task.imgurl
-        updateddate.value = task.updateddate.toString()
+        updateddate.value = Utility.convertDateToReadable(task.updateddate)
 
     }
     companion object {
