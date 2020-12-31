@@ -14,7 +14,7 @@ import io.reactivex.Single
 
 
 class ToDoRepo (private val todolistdao: ToDoTaskDao?) {
-    private var tasks: LiveData<List<ToDoTask>>? = null
+
 
 
 

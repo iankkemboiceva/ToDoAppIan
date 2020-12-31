@@ -20,6 +20,7 @@ class ToDoListViewModel(private val todorepo: ToDoRepo) : BaseViewModel() {
 
 
         val disposable = todorepo.getloadAllTasks()
+
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ todolist ->
@@ -32,10 +33,7 @@ class ToDoListViewModel(private val todorepo: ToDoRepo) : BaseViewModel() {
         addDisposable(disposable)
     }
 
-    fun addToDo(task: ToDoTask) {
 
-        todorepo.addTask(task)
-    }
 
     private fun handleresult(result: List<ToDoTask>) {
 

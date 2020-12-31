@@ -10,10 +10,10 @@ import java.util.*
 @Entity(tableName = "todo")
 @Parcelize
 data class ToDoTask(@PrimaryKey(autoGenerate = true) val id: Long?,
-                       val title: String,
-                      val content: String,
-                      val imgurl: String,
-                      @ColumnInfo(name = "updated_date")
+                    var title: String,
+                    val content: String,
+                    val imgurl: String,
+                    @ColumnInfo(name = "updated_date")
                       val updateddate: Date,
-                      val booledit: Boolean
+                    val booledit: Boolean
 ): Parcelable
